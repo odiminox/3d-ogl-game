@@ -27,9 +27,7 @@ int init()
 {
   std::cout << " INIT! " << std::endl;
 
-  entities.push_back(a);
-  entities.push_back(b);
-  entities.push_back(c);
+  std::cout << "Graphics Booting up..." << std::endl;
 
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -44,15 +42,21 @@ int init()
   }
   glfwMakeContextCurrent(window);
 
-  if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
+  if (!gladLoadGLLoader((GLADloadproc)(glfwGetProcAddress)))
   {
     std::cout << "Failed to initialize GLAD" << std::endl;
     return -1;
   }
 
-
   glViewport(0, 0, 800, 600);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+  std::cout << "initialising world entities" << std::endl;
+  entities.push_back(a);
+  entities.push_back(b);
+  entities.push_back(c);
+
+  return 1;
 }
 
 void quit()
@@ -82,19 +86,24 @@ void game_loop(bool loop)
 {
   while(loop)
   {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+      glfwSetWindowShouldClose(window, true);
+    }
+
     if ((GetKeyState('X') & 0x8000) || glfwWindowShouldClose(window))
     {
       loop = false;
     }
 
-    std::thread entity_thread(entity_update, loop);
-
     glfwSwapBuffers(window);
     glfwPollEvents();
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
+    std::thread entity_thread(entity_update, true);
     entity_thread.join();
   }
-
 
   std::cout << " QUIT! " << std::endl;
 }
@@ -109,6 +118,7 @@ int main()
     std::cout << "FAIL!" << std::endl;
     return -1;
   }
+
 
   game_loop(true);
 
