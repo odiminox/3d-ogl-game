@@ -144,11 +144,14 @@
   <ItemGroup>
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\maths_test.h" />
+    <ClCompile Include="Src\glad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\maths.h" />
     <ClInclude Include="Src\entity.h" />
     <ClInclude Include="Src\thing.h" />
+    <ClInclude Include="Src\third_party\glad\include\glad\glad.h" />
+    <ClInclude Include="Src\third_party\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Src\third_party\glfw3.h" />
   </ItemGroup>
   <ItemGroup>
