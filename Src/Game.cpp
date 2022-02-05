@@ -2,57 +2,74 @@
 //
 
 #include <iostream>
-#include "maths.h"
+#include <thread>
+#include <vector>
+#include <Windows.h>
+
+#include "maths_test.h"
+#include "entity.h"
+
+std::vector<game::entity::Entity*> entities;
+game::entity::Entity* a = new game::entity::Entity();
+game::entity::Entity* b = new game::entity::Entity();
+game::entity::Entity* c = new game::entity::Entity();
+
+void init()
+{
+  std::cout << " INIT! " << std::endl;
+
+  entities.push_back(a);
+  entities.push_back(b);
+  entities.push_back(c);
+
+}
+
+
+void render()
+{
+
+}
+
+void quit()
+{
+  a = nullptr;
+  delete a;
+  b = nullptr;
+  delete b;
+  c = nullptr;
+  delete c;
+}
+
+void update(bool loop)
+{
+  while(loop)
+  {
+    if (GetKeyState('X') & 0x8000)
+    {
+      loop = false;
+    }
+
+    for (auto entity : entities)
+    {
+      entity->update();
+    }
+  }
+
+  std::cout << " QUIT! " << std::endl;
+  quit();
+}
+
 
 int main()
 {
-  using namespace game::maths::vector;
+  std::cout << " START! " << std::endl;
 
-  std::cout << "-------------------vector tests-------------------" << std::endl;
-  Vector3 vec1(1.0f, 1.0f, 0.0f);
-  Vector3 vec2(1.0f, 2.0f, 0.0f);
-  std::cout << "vec1  x:" << vec1.x << " y:" << vec1.y << " z:" << vec1.z << std::endl;
-  std::cout << "vec2  x:" << vec2.x << " y:" << vec2.y << " z:" << vec1.z << std::endl;
+  init();
 
-  {
-    Vector3 res = vec1 + vec2;
-    std::cout << "vec1 + vec2 = x:" << res.x << " y:" << res.y << " z:" << res.z << std::endl;
-  }
+  std::thread t1(update, 3);
 
-  {
-    Vector3 res = vec1 * 4;
-    std::cout << "vec1 * 4 = x:" << res.x << " y:" << res.y << " z:" << res.z << std::endl;
-  }
-
-  {
-    Vector3 res = vec1 - vec2;
-    std::cout << "vec1 - vec2 = x:" << res.x << " y:" << res.y << " z:" << res.z << std::endl;
-  }
-
-  {
-    Vector3 res = vec1 / 0.5;
-    std::cout << "vec1 / 0.5 = x: " << res.x << " y:" << res.y << " z:" << res.z << std::endl;
-  }
-
-  {
-    std::cout << "magnitude(vec1) = " << magnitude(vec1) << std::endl;
-  }
-
-  {
-    Vector3 res = normalize(vec1);
-    std::cout << "normalize(vec1) = x: " << res.x << " y:" << res.y << " z:" << res.z << std::endl;
-  }
-
-  {
-    float res = dot_product(vec1, vec2);
-    std::cout << "dot_product(vec1, vec) = " << res << std::endl;
-  }
-
-  {
-    Vector3 res = cross_product(vec1, vec2);
-    std::cout << "cross_product(vec1, vec2) = x:" << res.x << " y:" << res.y << " z:" << res.z <<  std::endl;
-  }
-  
+  t1.join();
+  std::cout << " END! " << std::endl;
 
   return 0;
 }

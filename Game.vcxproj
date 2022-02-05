@@ -140,9 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\Game.cpp" />
+    <ClCompile Include="Src\maths_test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\maths.h" />
+    <ClInclude Include="Src\entity.h" />
+    <ClInclude Include="Src\thing.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
