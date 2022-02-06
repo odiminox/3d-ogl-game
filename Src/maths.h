@@ -215,6 +215,35 @@ namespace game
                m(2, 0) * m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0);
       }
 
+      inline Matrix3 scale(Matrix3& mat, vector::Vector3& scale)
+      {
+        float scale_matrix_data[4][4] = {
+          {scale.x, 0.0f,    0.0f,    0.0f},
+          {0.0f,    scale.y, 0.0f,    0.0f},
+          {0.0f,    0.0f,    scale.z, 1.0f}
+        };
+
+        Matrix3 scale_matrix(scale_matrix_data);
+        Matrix3 res = scale_matrix * mat;
+
+        return res;
+      }
+
+      inline Matrix3 translate(Matrix3& mat, vector::Vector3& trans)
+      {
+        float translate_matrix_data[4][4] = {
+          {0.0f, 0.0f, 0.0f, trans.x},
+          {0.0f, 0.0f, 0.0f, trans.y},
+          {0.0f, 0.0f, 0.0f, trans.z},
+          {0.0f, 0.0f, 0.0f, 1.0f},
+        };
+
+        Matrix3 translate_matrix(translate_matrix_data);
+        Matrix3 res = translate_matrix * mat;
+
+        return res;
+      }
+
       inline Matrix3 rotate_x(Matrix3& mat, float a)
       {
         const float cosine_of_a = cos(a);
