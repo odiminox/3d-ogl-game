@@ -10,6 +10,9 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Don't over-engineer the design with loads of design patterns that don't really offer anything
 - Try and code in a C style
 
+### Game Design
+- Simple platformer with basic physics
+
 ### Implemented Features
 - Bespoke maths lib for vectors/matrices (not optimised at all. Written for readability at the moment)
 - Multithreaded with worker tasks
@@ -20,3 +23,9 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Custom physics system for basic integration
 - Particles
 - Communicate with AWS services for score leaderboard
+
+### TODO
+- Sync data across threads
+- load textures
+- batch vertex data
+- 
