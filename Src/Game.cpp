@@ -5,6 +5,8 @@
 #include <thread>
 #include <vector>
 #include <Windows.h>
+#include <chrono>
+
 #include "third_party/glad/include/glad/glad.h"
 #include "third_party/glfw3.h"
 
@@ -71,16 +73,25 @@ void quit()
   delete c;
 }
 
-void entity_update(bool loop)
+void world_update(double delta_time)
 {
-  if (loop)
+  for (auto entity : entities)
   {
-    for (auto entity : entities)
-    {
-      entity->update();
-    }
+    entity->update();
   }
 }
+
+
+void world_render()
+{
+  glfwSwapBuffers(window);
+  glfwPollEvents();
+  glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+  glClear(GL_COLOR_BUFFER_BIT);
+}
+
+int simulation_time = 0;
+int time_slice_8ms = 8; 
 
 void game_loop(bool loop)
 {
@@ -96,13 +107,16 @@ void game_loop(bool loop)
       loop = false;
     }
 
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    auto ts = std::chrono::system_clock::now();
+    const auto current_time = std::chrono::duration_cast<std::chrono::seconds>(ts.time_since_epoch()).count();
 
-    std::thread entity_thread(entity_update, true);
-    entity_thread.join();
+    // Isolate the simulation time into slices which are ignorant of renderer/network
+    while (simulation_time < current_time)
+    {
+      simulation_time += time_slice_8ms;
+    }
+
+    world_render();
   }
 
   std::cout << " QUIT! " << std::endl;
@@ -118,7 +132,6 @@ int main()
     std::cout << "FAIL!" << std::endl;
     return -1;
   }
-
 
   game_loop(true);
 

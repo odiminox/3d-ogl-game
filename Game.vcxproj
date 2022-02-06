@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Src\maths.h" />
     <ClInclude Include="Src\entity.h" />
+    <ClInclude Include="Src\physics.h" />
     <ClInclude Include="Src\thing.h" />
     <ClInclude Include="Src\third_party\glad\include\glad\glad.h" />
     <ClInclude Include="Src\third_party\glad\include\KHR\khrplatform.h" />

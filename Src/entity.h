@@ -16,9 +16,7 @@ namespace game
 
       void update()
       {
-        std::cout << "before entity: " << id << " x: " << vector_data.position.x << std::endl;
         vector_data.position.x += 1.0f;
-        std::cout << "after entity: " << id <<  " x: " << vector_data.position.x << std::endl;
       }
     };
   }
