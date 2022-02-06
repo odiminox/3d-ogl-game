@@ -6,11 +6,11 @@ namespace game
 {
   namespace maths
   {
-    static double PI = 3.14159;
+    static float PI = 3.14159f;
 
-    inline double deg_to_radians(double degrees)
+    inline float deg_to_radians(float degrees)
     {
-      return (degrees * PI) / 180.0;
+      return (degrees * PI) / 180.0f;
     }
 
     namespace vector
@@ -250,9 +250,7 @@ namespace game
         };
 
         Matrix3 rotation_matrix(rotation_matrix_data);
-        Matrix3 res = rotation_matrix * mat;
-
-        return res;
+        return rotation_matrix;
       }
       
       inline Matrix3 rotate_y(Matrix3& mat, float a)
@@ -268,9 +266,7 @@ namespace game
         };
 
         Matrix3 rotation_matrix(rotation_matrix_data);
-        Matrix3 res = rotation_matrix * mat;
-
-        return res;
+        return rotation_matrix;
       }
       
       inline Matrix3 rotate_z(Matrix3& mat, float a)
@@ -286,9 +282,7 @@ namespace game
         };
 
         Matrix3 rotation_matrix(rotation_matrix_data);
-        Matrix3 res = rotation_matrix * mat;
-
-        return res;
+        return rotation_matrix;
       }
 
     }

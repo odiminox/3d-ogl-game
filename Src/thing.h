@@ -50,20 +50,19 @@ namespace game
 
       void set_scale(float amount)
       {
-        vector_data.scale = new Vector3(amount, amount, 0.0f);
+        vector_data.scale = new Vector3(amount, amount, amount);
       }
 
       void update_transform_matrices()
       {
         // L = T * R * S
 
-        transform_matrix = translate(transform_matrix, *vector_data.position);
+        Matrix3 translate_matrix = translate(transform_matrix, *vector_data.position);
+        Matrix3 rotation_matrix = rotate_z(transform_matrix, maths::deg_to_radians(vector_data.rotation->z));
+        Matrix3 scale_matrix = scale(transform_matrix, *vector_data.scale);
 
-        /*transform_matrix = rotate_x(transform_matrix, maths::deg_to_radians(vector_data.rotation->x));
-        transform_matrix = rotate_y(transform_matrix, maths::deg_to_radians(vector_data.rotation->y));
-        transform_matrix = rotate_z(transform_matrix, maths::deg_to_radians(vector_data.rotation->z));
-
-        transform_matrix = scale(transform_matrix, *vector_data.scale);*/
+        transform_matrix = translate_matrix * rotation_matrix;
+        //transform_matrix = transform_matrix * scale_matrix;
       }
 
       void cleanup()

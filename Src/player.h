@@ -24,22 +24,22 @@ namespace game
         // Do player update stuff here
         if (GetKeyState('W') & 0x8000)
         {
-          vector_data.position->y += 0.1 * delta_time;
+          vector_data.position->y += 0.001 * delta_time;
         }
 
         if (GetKeyState('S') & 0x8000)
         {
-          vector_data.position->y -= 0.1 * delta_time;
+          vector_data.position->y -= 0.001 * delta_time;
         }
 
         if (GetKeyState('A') & 0x8000)
         {
-          vector_data.position->x -= 0.1 * delta_time;
+          vector_data.position->x -= 0.001 * delta_time;
         }
 
         if (GetKeyState('D') & 0x8000)
         {
-          vector_data.position->x += 0.1 * delta_time;
+          vector_data.position->x += 0.001 * delta_time;
         }
 
 

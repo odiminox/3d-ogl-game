@@ -32,9 +32,9 @@ int init()
 {
   std::cout << " INIT! " << std::endl;
 
-  player->set_position(5, 3, 4);
-  player->set_rotation(0);
-  player->set_scale(1.0);
+  player->set_position(1.0f, 1.0f, 1.0f);
+  player->set_rotation(45.0f);
+  player->set_scale(0.5);
 
   player->render_data.material.shader_transform = &player->transform_matrix;
   game::renderer::render_objects.push_back(&player->render_data);
@@ -51,7 +51,7 @@ int init()
 
 void quit()
 {
-  // Need to sync data across threads
+  // Need to sync data across threads 
 //  player = nullptr;
 //  delete player;
 }
