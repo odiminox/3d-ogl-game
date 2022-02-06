@@ -23,20 +23,13 @@ game::entity::Entity* c = new game::entity::Entity();
 
 game::player::Player* player = new game::player::Player();
 
-
-
 bool quit_game = false;
-
-
 
 /*
   FSOUND_SAMPLE *sample = FSOUND_Sample_Load(FSOUND_FREE , "sounds/shoot.wav", 0, 0, 0);
   FSOUND_PlaySound(FSOUND_FREE, sample);
 
  */
-
-
-
 
 int init()
 {
@@ -57,8 +50,6 @@ int init()
 
 void quit()
 {
-
-
   a = nullptr;
   delete a;
   b = nullptr;
@@ -74,8 +65,6 @@ void world_update(int delta_time)
     entity->update(delta_time);
   }
 }
-
-
 
 int simulation_time = 0;
 int time_slice_8ms = 8; 
@@ -123,7 +112,6 @@ void game_loop()
 
   std::cout << " QUIT! " << std::endl;
 }
-
 
 int main()
 {
