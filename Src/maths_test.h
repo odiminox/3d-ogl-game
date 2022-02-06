@@ -2,6 +2,15 @@
 
 #include "maths.h"
 
+inline void operations_test()
+{
+  using namespace game::maths;
+
+  float radians = deg_to_radians(90.0);
+
+  std::cout << radians << std::endl;
+}
+
 inline void vector_test()
 {
   using namespace game::maths::vector;

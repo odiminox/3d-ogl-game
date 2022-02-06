@@ -8,6 +8,11 @@ namespace game
   {
     static double PI = 3.14159;
 
+    inline float deg_to_radians(float degrees)
+    {
+      return (degrees * PI) / 180.0;
+    }
+
     namespace vector
     {
       struct Vector3

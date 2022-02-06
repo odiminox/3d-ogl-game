@@ -84,9 +84,10 @@ int render_init()
 
   const char* vertex_shader_code = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
+    "uniform mat4 transform;\n"
     "void main()\n"
     "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "   gl_Position = transform * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
     "}\0";
 
   unsigned int VBO;
@@ -277,10 +278,6 @@ void game_loop()
 
 int main()
 {
-  //vector_test();
-  matrix_test();
-
-  return 0;
   std::cout << " START! " << std::endl;
 
   if (!init())
