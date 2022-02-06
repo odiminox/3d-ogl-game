@@ -27,6 +27,9 @@ GLFWwindow* window;
 
 bool quit_game = false;
 
+unsigned int shader_program;
+unsigned int vertex_array_object;
+
 /*
   FSOUND_SAMPLE *sample = FSOUND_Sample_Load(FSOUND_FREE , "sounds/shoot.wav", 0, 0, 0);
   FSOUND_PlaySound(FSOUND_FREE, sample);
@@ -130,7 +133,6 @@ int render_init()
 
   std::cout << "Creating shader program" << std::endl;
 
-  unsigned int shader_program;
   shader_program = glCreateProgram();
   glAttachShader(shader_program, vertex_shader);
   glAttachShader(shader_program, fragment_shader);
@@ -149,6 +151,15 @@ int render_init()
   glUseProgram(shader_program);
   glDeleteShader(vertex_shader);
   glDeleteShader(fragment_shader);
+
+
+  glGenVertexArrays(1, &vertex_array_object);
+
+  glBindVertexArray(vertex_array_object);
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
 
   std::cout << "Graphics stage booted up" << std::endl;
 }
@@ -198,6 +209,9 @@ void world_render()
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 
+  glUseProgram(shader_program);
+  glBindVertexArray(vertex_array_object);
+  glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 int simulation_time = 0;
