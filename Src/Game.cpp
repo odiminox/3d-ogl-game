@@ -17,7 +17,7 @@
 #include "renderer.h"
 
 std::vector<game::entity::Entity*> entities;
-
+game::entity::Entity* entity = new game::entity::Entity();
 game::player::Player* player = new game::player::Player();
 
 bool quit_game = false;
@@ -32,12 +32,21 @@ int init()
 {
   std::cout << " INIT! " << std::endl;
 
-  player->set_position(1.0f, 1.0f, 1.0f);
-  player->set_rotation(45.0f);
+  entities.push_back(entity);
+
+  player->set_position(0.0f, -0.25f, 1.0f);
+  player->set_rotation(0.0f);
   player->set_scale(0.5);
+
+  entity->set_position(0.0f, -0.25f, 1.0f);
+  entity->set_rotation(0.0f);
+  entity->set_scale(0.5);
 
   player->render_data.material.shader_transform = &player->transform_matrix;
   game::renderer::render_objects.push_back(&player->render_data);
+
+  entity->render_data.material.shader_transform = &entity->transform_matrix;
+  game::renderer::render_objects.push_back(&entity->render_data);
 
   if (!game::renderer::render_init())
   {
