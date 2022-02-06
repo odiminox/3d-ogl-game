@@ -59,9 +59,9 @@ inline void matrix_test()
   std::cout << "-------------------matrix tests-------------------" << std::endl;
 
   float mat_1_data[4][4] = {
-     {1.0f, 1.0f, 1.0f, 0.0f},
-     {1.0f, 1.0f, 1.0f, 0.0f},
-     {1.0f, 1.0f, 1.0f, 0.0f},
+     {1.0f, 0.0f, 0.0f, 0.0f},
+     {0.0f, 1.0f, 0.0f, 0.0f},
+     {0.0f, 1.0f, 0.0f, 0.0f},
      {0.0f, 0.0f, 0.0f, 1.0f}
   };
 
@@ -76,6 +76,8 @@ inline void matrix_test()
   Matrix3 mat2(mat_2_data);
 
   Matrix3 res = mat1 * mat2;
+
+  Matrix3 rotate_res = rotate_x(mat1, 1);
 
   std::cout << "end" << std::endl;
 }

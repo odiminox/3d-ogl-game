@@ -6,6 +6,8 @@ namespace game
 {
   namespace maths
   {
+    static double PI = 3.14159;
+
     namespace vector
     {
       struct Vector3
@@ -160,11 +162,6 @@ namespace game
                    0, 0, 0, 1 };
         }
 
-        float** dump()
-        {
-          return reinterpret_cast<float**>(m);
-        }
-
         float m[4][4];
       };
 
@@ -188,6 +185,7 @@ namespace game
         const float m22 = a(2, 0) * b(0, 2) + a(2, 1) * b(1, 2) + a(2, 2) * b(2, 2) + a(2, 3) * b(3, 2);
         const float m23 = a(2, 0) * b(0, 3) + a(2, 1) * b(1, 3) + a(2, 2) * b(2, 3) + a(2, 3) * b(3, 3);
 
+        // Row 4
         const float m30 = a(3, 0) * b(0, 0) + a(3, 1) * b(1, 0) + a(3, 2) * b(2, 0) + a(3, 3) * b(3, 0);
         const float m31 = a(3, 0) * b(0, 1) + a(3, 1) * b(1, 1) + a(3, 2) * b(2, 1) + a(3, 3) * b(3, 1);
         const float m32 = a(3, 0) * b(0, 2) + a(3, 1) * b(1, 2) + a(3, 2) * b(2, 2) + a(3, 3) * b(3, 2);
@@ -217,36 +215,43 @@ namespace game
                m(2, 0) * m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0);
       }
 
-      /*inline Matrix3 rotate_x(float a)
+      inline Matrix3 rotate_x(Matrix3& mat, float a)
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
 
-        const float m00 = 1.0f; const float m01 = 0.0f;        const float m02 = 0.0f;
-        const float m10 = 0.0f; const float m11 = cosine_of_a; const float m12 = -sine_of_a;
-        const float m20 = 0.0f; const float m21 = sine_of_a;   const float m22 = cosine_of_a;
+        float rotation_matrix_data[4][4] = {
+          {1.0f, 0.0f,        0.0f,         0.0f},
+          {0.0f, cosine_of_a, -sine_of_a,   0.0f},
+          {0.0f, sine_of_a,   cosine_of_a,  0.0f},
+          {0.0f, 0.0f,        0.0f,         1.0f}
+        };
 
-        return { m00, m01, m02,
-                 m10, m11, m12,
-                 m20, m21, m22 };
+        Matrix3 rotation_matrix(rotation_matrix_data);
+        Matrix3 res = rotation_matrix * mat;
 
+        return res;
       }
-
-      inline Matrix3 rotate_y(float a)
+      
+      inline Matrix3 rotate_y(Matrix3& mat, float a)
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
 
-        const float m00 = cosine_of_a; const float m01 = 0.0f; const float m02 = sine_of_a;
-        const float m10 = 0.0f;        const float m11 = 1.0f; const float m12 = 0.0f;
-        const float m20 = -sine_of_a;  const float m21 = 0.0f; const float m22 = cosine_of_a;
+        float rotation_matrix_data[4][4] = {
+          {cosine_of_a, 0.0f, sine_of_a,   0.0f},
+          {0.0f,        1.0f, 0.0f,        0.0f},
+          {-sine_of_a,  0.0f, cosine_of_a, 0.0f},
+          {0.0f,        0.0f, 0.0f,        1.0f}
+        };
 
-        return { m00, m01, m02,
-                 m10, m11, m12,
-                 m20, m21, m22 };
+        Matrix3 rotation_matrix(rotation_matrix_data);
+        Matrix3 res = rotation_matrix * mat;
+
+        return res;
       }
-
-      inline Matrix3 rotate_z(float a)
+      
+      inline Matrix3 rotate_z(Matrix3& mat, float a)
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
@@ -255,10 +260,18 @@ namespace game
         const float m10 = sine_of_a;   const float m11 = cosine_of_a; const float m12 = 0.0f;
         const float m20 = 0.0f;        const float m21 = 0.0f;        const float m22 = 1.0f;
 
-        return { m00, m01, m02,
-                 m10, m11, m12,
-                 m20, m21, m22 };
-      }*/
+        float rotation_matrix_data[4][4] = {
+          {cosine_of_a, -sine_of_a,  0.0f, 0.0f},
+          {sine_of_a,   cosine_of_a, 0.0f, 0.0f},
+          {0.0f,        0.0f,        0.0f, 0.0f},
+          {0.0f,        0.0f,        0.0f, 1.0f}
+        };
+
+        Matrix3 rotation_matrix(rotation_matrix_data);
+        Matrix3 res = rotation_matrix * mat;
+
+        return res;
+      }
 
     }
   }
