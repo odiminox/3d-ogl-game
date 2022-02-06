@@ -6,6 +6,7 @@
 #include <vector>
 #include <Windows.h>
 #include <chrono>
+#include <future>
 
 #include "third_party/glad/include/glad/glad.h"
 #include "third_party/glfw3.h"
@@ -13,13 +14,24 @@
 
 #include "maths_test.h"
 #include "entity.h"
+#include "player.h"
 
 std::vector<game::entity::Entity*> entities;
 game::entity::Entity* a = new game::entity::Entity();
 game::entity::Entity* b = new game::entity::Entity();
 game::entity::Entity* c = new game::entity::Entity();
 
+game::player::Player* player = new game::player::Player();
+
 GLFWwindow* window;
+
+bool quit_game = false;
+
+/*
+  FSOUND_SAMPLE *sample = FSOUND_Sample_Load(FSOUND_FREE , "sounds/shoot.wav", 0, 0, 0);
+  FSOUND_PlaySound(FSOUND_FREE, sample);
+
+ */
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -78,10 +90,9 @@ void world_update(double delta_time)
 {
   for (auto entity : entities)
   {
-    entity->update();
+    entity->update(delta_time);
   }
 }
-
 
 void world_render()
 {
@@ -94,18 +105,34 @@ void world_render()
 int simulation_time = 0;
 int time_slice_8ms = 8; 
 
-void game_loop(bool loop)
+void game_logic(int delta_time)
 {
-  while(loop)
-  {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    {
-      glfwSetWindowShouldClose(window, true);
-    }
+  const auto player_task = std::async(std::launch::async,
+    [delta_time]() {
+      player->update(delta_time);
+    });
 
+  player_task.wait();
+
+  const auto entity_task = std::async(std::launch::async,
+    [delta_time]() {
+      for (auto entity : entities)
+      {
+        entity->update(delta_time);
+      }
+    });
+
+  entity_task.wait();
+}
+
+void game_loop()
+{
+  while(!quit_game)
+  {
     if ((GetKeyState('X') & 0x8000) || glfwWindowShouldClose(window))
     {
-      loop = false;
+      quit_game = false;
+      glfwSetWindowShouldClose(window, true);
     }
 
     auto ts = std::chrono::system_clock::now();
@@ -115,9 +142,8 @@ void game_loop(bool loop)
     while (simulation_time < current_time)
     {
       simulation_time += time_slice_8ms;
+      game_logic(time_slice_8ms);
     }
-
-    world_render();
   }
 
   std::cout << " QUIT! " << std::endl;
@@ -134,7 +160,19 @@ int main()
     return -1;
   }
 
-  game_loop(true);
+  std::thread game_thread(game_loop);
+  game_thread.detach();
+
+  while (!quit_game)
+  {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(window))
+    {
+      quit_game = true;
+      glfwSetWindowShouldClose(window, true);
+    }
+
+    world_render();
+  }
 
   quit();
   std::cout << " END! " << std::endl;

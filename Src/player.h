@@ -5,13 +5,13 @@
 
 namespace game
 {
-  namespace entity
+  namespace player
   {
-    struct Entity : thing::Thing
+    struct Player : thing::Thing
     {
-      Entity() : Thing(1.0f, 1.0f, 0.0f)
+      Player() : Thing(1.0f, 1.0f, 0.0f)
       {
-       
+
       }
 
       void update(int delta_time)
