@@ -9,6 +9,7 @@
 
 #include "third_party/glad/include/glad/glad.h"
 #include "third_party/glfw3.h"
+#include "third_party/fmod/api/inc/fmod.h"
 
 #include "maths_test.h"
 #include "entity.h"
