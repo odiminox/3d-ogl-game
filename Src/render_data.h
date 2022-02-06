@@ -4,6 +4,7 @@
 #include "third_party/glad/include/glad/glad.h"
 #include "third_party/glfw3.h"
 
+#include "maths.h"
 
 namespace game
 {
@@ -11,12 +12,14 @@ namespace game
   {
     struct Material
     {
+      maths::matrix::Matrix3* shader_transform = new maths::matrix::Matrix3(1);
+
       const char* vertex_shader_code = "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "uniform mat4 transform;\n"
         "void main()\n"
         "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+        "   gl_Position = transform * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
         "}\0";
 
       const char* fragment_shader_code = "#version 330 core\n"
@@ -92,6 +95,14 @@ namespace game
       void render_material() const
       {
         glUseProgram(shader_program_id);
+        unsigned int transformLoc = glGetUniformLocation(shader_program_id, "transform");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, *shader_transform->m);
+      }
+
+      void cleanup()
+      {
+        shader_transform = nullptr;
+        delete shader_transform;
       }
     };
 
@@ -113,6 +124,8 @@ namespace game
             1, 2, 3    // second triangle
         };
 
+        // this is not an ideal way to do this. We want to batch all the vertices into a single buffer and call all this once - 
+        // but works for now as a quick n dirty means to get multiple objects up
         unsigned int vertex_buffer_object;
         glGenBuffers(1, &vertex_buffer_object);
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
@@ -135,11 +148,10 @@ namespace game
         return 0;
       }
 
-      void render_vertex()
+      void render_vertex() const
       {
         glBindVertexArray(vertex_array_object);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
       }
     };
 

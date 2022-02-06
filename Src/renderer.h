@@ -57,8 +57,6 @@ namespace game
         render_data_object->vertex_object.initialise();
       }
 
-      // here
-      
       std::cout << "Graphics stage booted up" << std::endl;
 
       return 0;
@@ -73,8 +71,8 @@ namespace game
 
       for (render_data::RenderData* render_data_object : render_objects)
       {
-        glUseProgram(render_data_object->material.shader_program_id);
-        glBindVertexArray(render_data_object->vertex_object.vertex_array_object);
+        render_data_object->material.render_material();
+        render_data_object->vertex_object.render_vertex();
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
       }
@@ -97,6 +95,11 @@ namespace game
     inline void render_quit()
     {
       glfwTerminate();
+
+      for (render_data::RenderData* render_data_object : render_objects)
+      {
+        render_data_object->material.cleanup();
+      }
     }
 
     inline void renderer_quit_window()

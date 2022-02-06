@@ -147,7 +147,6 @@ namespace game
           m[3][0] = data[3][0]; m[3][1] = data[3][1]; m[3][2] = data[3][2]; m[3][3] = data[3][3];
         }
 
-
         float& operator()(const int i, const int j)
         {
           return m[j][i];
@@ -156,14 +155,6 @@ namespace game
         const float& operator()(const int i, const int j) const
         {
           return m[j][i];
-        }
-
-        Matrix3 identity()
-        {
-          return { 1, 0, 0, 0,
-                   0, 1, 0, 0,
-                   0, 0, 1, 0,
-                   0, 0, 0, 1 };
         }
 
         float m[4][4];
@@ -201,7 +192,6 @@ namespace game
                  m30, m31, m32, m33 };
       }
 
-
       inline vector::Vector3 operator*(const Matrix3& m, const vector::Vector3& v)
       {
         const float x = m(0, 0) * v.x + m(0, 1) * v.y + m(0, 2) * v.z + m(0, 3) * v.w;
@@ -236,16 +226,15 @@ namespace game
       inline Matrix3 translate(Matrix3& mat, vector::Vector3& trans)
       {
         float translate_matrix_data[4][4] = {
-          {0.0f, 0.0f, 0.0f, trans.x},
-          {0.0f, 0.0f, 0.0f, trans.y},
-          {0.0f, 0.0f, 0.0f, trans.z},
+          {1.0f, 0.0f, 0.0f, trans.x},
+          {0.0f, 1.0f, 0.0f, trans.y},
+          {0.0f, 0.0f, 1.0f, trans.z},
           {0.0f, 0.0f, 0.0f, 1.0f},
         };
 
         Matrix3 translate_matrix(translate_matrix_data);
-        Matrix3 res = translate_matrix * mat;
 
-        return res;
+        return translate_matrix;
       }
 
       inline Matrix3 rotate_x(Matrix3& mat, float a)
@@ -288,10 +277,6 @@ namespace game
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
-
-        const float m00 = cosine_of_a; const float m01 = -sine_of_a;  const float m02 = 0.0f;
-        const float m10 = sine_of_a;   const float m11 = cosine_of_a; const float m12 = 0.0f;
-        const float m20 = 0.0f;        const float m21 = 0.0f;        const float m22 = 1.0f;
 
         float rotation_matrix_data[4][4] = {
           {cosine_of_a, -sine_of_a,  0.0f, 0.0f},

@@ -17,9 +17,6 @@
 #include "renderer.h"
 
 std::vector<game::entity::Entity*> entities;
-/*game::entity::Entity* a = new game::entity::Entity();
-game::entity::Entity* b = new game::entity::Entity();
-game::entity::Entity* c = new game::entity::Entity();*/
 
 game::player::Player* player = new game::player::Player();
 
@@ -35,6 +32,11 @@ int init()
 {
   std::cout << " INIT! " << std::endl;
 
+  player->set_position(5, 3, 10);
+  player->set_scale(1);
+  player->set_scale(1.0);
+
+  player->render_data.material.shader_transform = &player->transform_matrix;
   game::renderer::render_objects.push_back(&player->render_data);
 
   if (!game::renderer::render_init())
@@ -43,21 +45,14 @@ int init()
   }
 
   std::cout << "initialising world entities" << std::endl;
-  /*entities.push_back(a);
-  entities.push_back(b);
-  entities.push_back(c);*/
 
   return 1;
 }
 
 void quit()
 {
-  /*a = nullptr;
-  delete a;
-  b = nullptr;
-  delete b;
-  c = nullptr;
-  delete c;*/
+//  player = nullptr;
+//  delete player;
 }
 
 void world_update(int delta_time)
