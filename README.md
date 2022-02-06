@@ -11,7 +11,7 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Try and code in a C style
 
 ### Implemented Features
-- Bespoke maths lib for vectors/matrices
+- Bespoke maths lib for vectors/matrices (not optimised at all. Written for readability at the moment)
 - Multithreaded with worker tasks
 - Fixed simulation time for game logic step isolated from renderer/network logic
 - FMOD audio
