@@ -18,4 +18,5 @@ I have tried to use C++ in a manner that is friendly to games with the following
 
 ### Planned Features
 - Custom physics system for basic integration
+- Particles
 - Communicate with AWS services for score leaderboard
