@@ -8,7 +8,7 @@ namespace game
   {
     static double PI = 3.14159;
 
-    inline float deg_to_radians(float degrees)
+    inline double deg_to_radians(double degrees)
     {
       return (degrees * PI) / 180.0;
     }
@@ -120,7 +120,6 @@ namespace game
     {
       struct Matrix3
       {
-        Matrix3() = default;
         Matrix3(const float m00, const float m01, const float m02, const float m03,
                const float m10, const float m11, const float m12, const float m13,
                const float m20, const float m21, const float m22, const float m23,

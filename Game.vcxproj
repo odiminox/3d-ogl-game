@@ -152,6 +152,7 @@
     <ClInclude Include="Src\physics.h" />
     <ClInclude Include="Src\player.h" />
     <ClInclude Include="Src\renderer.h" />
+    <ClInclude Include="Src\render_data.h" />
     <ClInclude Include="Src\thing.h" />
     <ClInclude Include="Src\third_party\fmod\api\inc\fmod.h" />
     <ClInclude Include="Src\third_party\fmod\api\inc\fmoddyn.h" />

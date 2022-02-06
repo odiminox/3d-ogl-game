@@ -11,12 +11,17 @@ namespace game
     {
       Entity() : Thing(1.0f, 1.0f, 0.0f)
       {
-       
+      }
+
+      void init()
+      {
+        render_data.material.initialise();
+        render_data.vertex_object.initialise();
       }
 
       void update(int delta_time)
       {
-        vector_data.position.x += 1.0f;
+        update_transform_matrices();
       }
     };
   }

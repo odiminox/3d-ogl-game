@@ -17,9 +17,9 @@
 #include "renderer.h"
 
 std::vector<game::entity::Entity*> entities;
-game::entity::Entity* a = new game::entity::Entity();
+/*game::entity::Entity* a = new game::entity::Entity();
 game::entity::Entity* b = new game::entity::Entity();
-game::entity::Entity* c = new game::entity::Entity();
+game::entity::Entity* c = new game::entity::Entity();*/
 
 game::player::Player* player = new game::player::Player();
 
@@ -35,27 +35,29 @@ int init()
 {
   std::cout << " INIT! " << std::endl;
 
+  game::renderer::render_objects.push_back(&player->render_data);
+
   if (!game::renderer::render_init())
   {
     return -1;
   }
 
   std::cout << "initialising world entities" << std::endl;
-  entities.push_back(a);
+  /*entities.push_back(a);
   entities.push_back(b);
-  entities.push_back(c);
+  entities.push_back(c);*/
 
   return 1;
 }
 
 void quit()
 {
-  a = nullptr;
+  /*a = nullptr;
   delete a;
   b = nullptr;
   delete b;
   c = nullptr;
-  delete c;
+  delete c;*/
 }
 
 void world_update(int delta_time)
@@ -71,12 +73,12 @@ int time_slice_8ms = 8;
 
 void game_logic(int delta_time)
 {
-  const auto player_task = std::async(std::launch::async,
+  const auto player_update_task = std::async(std::launch::async,
     [delta_time]() {
       player->update(delta_time);
     });
 
-  player_task.wait();
+  player_update_task.wait();
 
   const auto entity_task = std::async(std::launch::async,
     [delta_time]() {

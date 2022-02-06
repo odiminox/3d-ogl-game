@@ -6,7 +6,7 @@ inline void operations_test()
 {
   using namespace game::maths;
 
-  float radians = deg_to_radians(90.0);
+  double radians = deg_to_radians(90.0);
 
   std::cout << radians << std::endl;
 }
