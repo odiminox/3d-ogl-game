@@ -172,6 +172,8 @@ int render_init()
   glEnableVertexAttribArray(0);
 
   std::cout << "Graphics stage booted up" << std::endl;
+
+  return 0;
 }
 
 int init()
@@ -275,6 +277,10 @@ void game_loop()
 
 int main()
 {
+  //vector_test();
+  matrix_test();
+
+  return 0;
   std::cout << " START! " << std::endl;
 
   if (!init())

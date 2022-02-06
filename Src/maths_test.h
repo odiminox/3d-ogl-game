@@ -2,7 +2,7 @@
 
 #include "maths.h"
 
-inline void maths_test()
+inline void vector_test()
 {
   using namespace game::maths::vector;
 
@@ -50,4 +50,32 @@ inline void maths_test()
     Vector3 res = cross_product(vec1, vec2);
     std::cout << "cross_product(vec1, vec2) = x:" << res.x << " y:" << res.y << " z:" << res.z << std::endl;
   }
+}
+
+inline void matrix_test()
+{
+  using namespace game::maths::matrix;
+
+  std::cout << "-------------------matrix tests-------------------" << std::endl;
+
+  float mat_1_data[4][4] = {
+     {1.0f, 1.0f, 1.0f, 0.0f},
+     {1.0f, 1.0f, 1.0f, 0.0f},
+     {1.0f, 1.0f, 1.0f, 0.0f},
+     {0.0f, 0.0f, 0.0f, 1.0f}
+  };
+
+  float mat_2_data[4][4] = {
+   {2.0f, 2.0f, 2.0f, 0.0f},
+   {2.0f, 2.0f, 2.0f, 0.0f},
+   {2.0f, 2.0f, 2.0f, 0.0f},
+   {0.0f, 0.0f, 0.0f, 1.0f}
+  };
+
+  Matrix3 mat1(mat_1_data);
+  Matrix3 mat2(mat_2_data);
+
+  Matrix3 res = mat1 * mat2;
+
+  std::cout << "end" << std::endl;
 }
