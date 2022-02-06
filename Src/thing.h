@@ -59,11 +59,11 @@ namespace game
 
         transform_matrix = translate(transform_matrix, *vector_data.position);
 
-        transform_matrix = rotate_x(transform_matrix, vector_data.rotation->x);
-        transform_matrix = rotate_y(transform_matrix, vector_data.rotation->y);
-        transform_matrix = rotate_z(transform_matrix, vector_data.rotation->z);
+        /*transform_matrix = rotate_x(transform_matrix, maths::deg_to_radians(vector_data.rotation->x));
+        transform_matrix = rotate_y(transform_matrix, maths::deg_to_radians(vector_data.rotation->y));
+        transform_matrix = rotate_z(transform_matrix, maths::deg_to_radians(vector_data.rotation->z));
 
-        transform_matrix = scale(transform_matrix, *vector_data.scale);
+        transform_matrix = scale(transform_matrix, *vector_data.scale);*/
       }
 
       void cleanup()
