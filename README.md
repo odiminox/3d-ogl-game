@@ -28,4 +28,3 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Sync data across threads
 - load textures
 - batch vertex data
-- 
