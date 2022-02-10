@@ -9,6 +9,7 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Limit usage of template programming
 - Don't over-engineer the design with loads of design patterns that don't really offer anything
 - Try and code in a C style
+- If exceptions are used, they must be sandboxed otherwise assert and static asserts
 
 ### Game Design
 - Simple platformer with basic physics
