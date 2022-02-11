@@ -16,7 +16,8 @@ public:
   int init();
   void quit();
   void world_update(int delta_time);
-  void game_logic(int delta_time);
+  void integrate_physics(int delta_time);
+  void things_update(int delta_time);
   void game_loop();
 
   bool quit_game = false;

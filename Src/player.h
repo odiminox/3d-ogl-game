@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "thing.h"
+#include "physics.h"
 
 namespace game
 {
@@ -42,12 +43,10 @@ namespace game
           vector_data.position.x += 0.001 * delta_time;
         }
 
-
-        std::cout << "player location is: " << " x:" << vector_data.position.x <<
-          " y:" << vector_data.position.y << " z:" << vector_data.position.z << std::endl;
-
         update_transform_matrices();
       }
+
+      game::physics::PhysicsData physics_data;
     };
   }
 }

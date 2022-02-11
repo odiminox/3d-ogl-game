@@ -65,7 +65,7 @@ void Game::world_update(int delta_time)
   }
 }
 
-void Game::game_logic(int delta_time)
+void Game::things_update(int delta_time)
 {
   const auto player_update_task = std::async(std::launch::async,
     [delta_time]() {
@@ -85,6 +85,31 @@ void Game::game_logic(int delta_time)
   entity_task.wait();
 }
 
+void Game::integrate_physics(int delta_time)
+{
+  const auto player_physics_task = std::async(std::launch::async,
+    [delta_time]() {
+      game::physics::integrate(player.vector_data.position, 
+        player.physics_data, 
+        delta_time);
+    });
+
+  player_physics_task.wait();
+
+  const auto entity_physics_task = std::async(std::launch::async,
+    [delta_time]() {
+      for (auto entity : entities)
+      {
+        game::physics::integrate(entity->vector_data.position, 
+          entity->physics_data, 
+          delta_time);
+      }
+    });
+
+  entity_physics_task.wait();
+}
+
+
 void Game::game_loop()
 {
   while(!quit_game)
@@ -102,7 +127,8 @@ void Game::game_loop()
     while (simulation_time < current_time)
     {
       simulation_time += time_slice_8ms;
-      game_logic(time_slice_8ms);
+      integrate_physics(time_slice_8ms);
+      things_update(time_slice_8ms);
     }
   }
 

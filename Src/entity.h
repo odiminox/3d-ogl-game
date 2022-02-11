@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "thing.h"
+#include "physics.h"
 
 namespace game
 {
@@ -23,6 +24,8 @@ namespace game
       {
         update_transform_matrices();
       }
+
+      game::physics::PhysicsData physics_data;
     };
   }
 }
