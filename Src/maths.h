@@ -8,7 +8,7 @@ namespace game
   {
     static float PI = 3.14159f;
 
-    inline float deg_to_radians(float degrees)
+    inline float deg_to_radians(const float degrees)
     {
       return (degrees * PI) / 180.0f;
     }

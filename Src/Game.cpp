@@ -20,31 +20,28 @@
  */
 
 std::vector<game::entity::Entity*> entities;
-game::entity::Entity* entity;
-game::player::Player* player;
+game::entity::Entity entity;
+game::player::Player player;
 
 int Game::init()
 {
   std::cout << " INIT! " << std::endl;
 
-  entity = new game::entity::Entity();
-  player = new game::player::Player();
+  entities.push_back(&entity);
 
-  entities.push_back(entity);
+  player.set_position(0.0f, -0.25f, 1.0f);
+  player.set_rotation(0.0f);
+  player.set_scale(0.5);
 
-  player->set_position(0.0f, -0.25f, 1.0f);
-  player->set_rotation(0.0f);
-  player->set_scale(0.5);
+  entity.set_position(0.0f, -0.25f, 1.0f);
+  entity.set_rotation(0.0f);
+  entity.set_scale(0.5);
 
-  entity->set_position(0.0f, -0.25f, 1.0f);
-  entity->set_rotation(0.0f);
-  entity->set_scale(0.5);
+  player.render_data.material.shader_transform = &player.transform_matrix;
+  renderer.add_new_render_data_object(player.render_data);
 
-  player->render_data.material.shader_transform = &player->transform_matrix;
-  renderer.add_new_render_data_object(player->render_data);
-
-  entity->render_data.material.shader_transform = &entity->transform_matrix;
-  renderer.add_new_render_data_object(entity->render_data);
+  entity.render_data.material.shader_transform = &entity.transform_matrix;
+  renderer.add_new_render_data_object(entity.render_data);
 
   if (!renderer.render_init())
   {
@@ -58,9 +55,6 @@ int Game::init()
 
 void Game::quit()
 {
-  // Need to sync data across threads 
-//  player = nullptr;
-//  delete player;
 }
 
 void Game::world_update(int delta_time)
@@ -75,7 +69,7 @@ void Game::game_logic(int delta_time)
 {
   const auto player_update_task = std::async(std::launch::async,
     [delta_time]() {
-      player->update(delta_time);
+      player.update(delta_time);
     });
 
   player_update_task.wait();

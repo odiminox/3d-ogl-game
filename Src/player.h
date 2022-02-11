@@ -24,27 +24,27 @@ namespace game
         // Do player update stuff here
         if (GetKeyState('W') & 0x8000)
         {
-          vector_data.position->y += 0.001 * delta_time;
+          vector_data.position.y += 0.001 * delta_time;
         }
 
         if (GetKeyState('S') & 0x8000)
         {
-          vector_data.position->y -= 0.001 * delta_time;
+          vector_data.position.y -= 0.001 * delta_time;
         }
 
         if (GetKeyState('A') & 0x8000)
         {
-          vector_data.position->x -= 0.001 * delta_time;
+          vector_data.position.x -= 0.001 * delta_time;
         }
 
         if (GetKeyState('D') & 0x8000)
         {
-          vector_data.position->x += 0.001 * delta_time;
+          vector_data.position.x += 0.001 * delta_time;
         }
 
 
-        std::cout << "player location is: " << " x:" << vector_data.position->x <<
-          " y:" << vector_data.position->y << " z:" << vector_data.position->z << std::endl;
+        std::cout << "player location is: " << " x:" << vector_data.position.x <<
+          " y:" << vector_data.position.y << " z:" << vector_data.position.z << std::endl;
 
         update_transform_matrices();
       }

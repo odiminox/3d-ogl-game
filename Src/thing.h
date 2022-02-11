@@ -16,9 +16,9 @@ namespace game
     {
       VectorData() = default;
 
-      Vector3 *position = new Vector3();
-      Vector3 *scale = new Vector3();
-      Vector3 *rotation = new Vector3();
+      Vector3 position;
+      Vector3 scale;
+      Vector3 rotation;
     };
 
     struct Thing
@@ -40,26 +40,26 @@ namespace game
 
       void set_position(float x, float y, float z)
       {
-        vector_data.position = new Vector3(x, y, z);
+        vector_data.position = Vector3(x, y, z);
       }
 
       void set_rotation(float amount)
       {
-        vector_data.rotation = new Vector3(0.0f, 0.0f, amount);
+        vector_data.rotation = Vector3(0.0f, 0.0f, amount);
       }
 
       void set_scale(float amount)
       {
-        vector_data.scale = new Vector3(amount, amount, amount);
+        vector_data.scale = Vector3(amount, amount, amount);
       }
 
       void update_transform_matrices()
       {
         // L = T * R * S
 
-        Matrix3 translate_matrix = translate(transform_matrix, *vector_data.position);
-        Matrix3 rotation_matrix = rotate_z(transform_matrix, maths::deg_to_radians(vector_data.rotation->z));
-        Matrix3 scale_matrix = scale(transform_matrix, *vector_data.scale);
+        Matrix3 translate_matrix = translate(transform_matrix, vector_data.position);
+        Matrix3 rotation_matrix = rotate_z(transform_matrix, maths::deg_to_radians(vector_data.rotation.z));
+        Matrix3 scale_matrix = scale(transform_matrix, vector_data.scale);
 
         transform_matrix = translate_matrix * rotation_matrix;
         //transform_matrix = transform_matrix * scale_matrix;
@@ -67,12 +67,6 @@ namespace game
 
       void cleanup()
       {
-        vector_data.position = nullptr;
-        delete vector_data.position;
-        vector_data.rotation = nullptr;
-        delete vector_data.scale;
-        vector_data.rotation = nullptr;
-        delete vector_data.rotation;
       }
     };
 
