@@ -148,6 +148,7 @@
     <ClCompile Include="Src\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\maths.h" />
     <ClInclude Include="Src\entity.h" />
     <ClInclude Include="Src\physics.h" />

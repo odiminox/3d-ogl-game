@@ -97,7 +97,7 @@ namespace game
       return  glfwWindowShouldClose(window);
     }
 
-    void Renderer::AddNewRenderDataObject(render_data::RenderData& render_data)
+    void Renderer::add_new_render_data_object(render_data::RenderData& render_data)
     {
       render_objects.push_back(&render_data);
     }

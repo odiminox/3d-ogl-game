@@ -26,7 +26,7 @@ namespace game
       void renderer_quit_window() const;
       bool should_renderer_quit_window() const;
 
-      void AddNewRenderDataObject(render_data::RenderData& render_data);
+      void add_new_render_data_object(render_data::RenderData& render_data);
     };
 
 
