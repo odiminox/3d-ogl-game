@@ -145,6 +145,7 @@
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\maths_test.h" />
     <ClCompile Include="Src\glad.cpp" />
+    <ClCompile Include="Src\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\maths.h" />

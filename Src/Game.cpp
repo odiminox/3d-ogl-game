@@ -22,6 +22,8 @@ game::player::Player* player = new game::player::Player();
 
 bool quit_game = false;
 
+game::renderer::Renderer renderer;
+
 /*
   FSOUND_SAMPLE *sample = FSOUND_Sample_Load(FSOUND_FREE , "sounds/shoot.wav", 0, 0, 0);
   FSOUND_PlaySound(FSOUND_FREE, sample);
@@ -43,12 +45,12 @@ int init()
   entity->set_scale(0.5);
 
   player->render_data.material.shader_transform = &player->transform_matrix;
-  game::renderer::render_objects.push_back(&player->render_data);
+  renderer.AddNewRenderDataObject(player->render_data);
 
   entity->render_data.material.shader_transform = &entity->transform_matrix;
-  game::renderer::render_objects.push_back(&entity->render_data);
+  renderer.AddNewRenderDataObject(entity->render_data);
 
-  if (!game::renderer::render_init())
+  if (!renderer.render_init())
   {
     return -1;
   }
@@ -100,10 +102,10 @@ void game_loop()
 {
   while(!quit_game)
   {
-    if ((GetKeyState('X') & 0x8000) || game::renderer::should_renderer_quit_window())
+    if ((GetKeyState('X') & 0x8000) || renderer.should_renderer_quit_window())
     {
       quit_game = false;
-      game::renderer::render_quit();
+      renderer.render_quit();
     }
 
     auto ts = std::chrono::system_clock::now();
@@ -133,7 +135,7 @@ int main()
   std::thread game_thread(game_loop);
   game_thread.detach();
 
-  game::renderer::world_render_loop(quit_game);
+  renderer.world_render_loop(quit_game);
 
   quit();
   std::cout << " END! " << std::endl;
