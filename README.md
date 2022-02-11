@@ -4,11 +4,12 @@
 ### Overview
 Tasked myself to create a simple 2D C++ game in OpenGL 3.3 using as few external libs as possible in as little time as possible.
 I have tried to use C++ in a manner that is friendly to games with the following tenants:
-- Avoid any unnecessary levels of abstraction by using OOP in its most simplest and practical forms (goodbye vtables)
+- Avoid any unnecessary levels of abstraction by using OOP in its most simplest and practical forms, favouring composition and aggregation
 - Limit usage of heavy std libraries (some will be used for early development to speed up implementation and improved later)
 - Limit usage of template programming
 - Don't over-engineer the design with loads of design patterns that don't really offer anything
 - Try and code in a C style
+- If exceptions are used, they must be sandboxed otherwise assert and static asserts
 
 ### Game Design
 - Simple platformer with basic physics
@@ -28,4 +29,3 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Sync data across threads
 - load textures
 - batch vertex data
-- 
