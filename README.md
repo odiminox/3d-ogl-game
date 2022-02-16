@@ -19,9 +19,9 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Multithreaded with worker tasks
 - Fixed simulation time for game logic step isolated from renderer/network logic
 - FMOD audio
+- Custom physics system for basic integration
 
 ### Planned Features
-- Custom physics system for basic integration
 - Particles
 - Communicate with AWS services for score leaderboard
 
