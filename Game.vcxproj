@@ -146,6 +146,11 @@
     <ClCompile Include="Src\maths_test.h" />
     <ClCompile Include="Src\glad.cpp" />
     <ClCompile Include="Src\renderer.cpp" />
+    <ClCompile Include="Src\third_party\imgui\imgui.cpp" />
+    <ClCompile Include="Src\third_party\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Src\third_party\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Src\third_party\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Src\third_party\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -163,6 +168,12 @@
     <ClInclude Include="Src\third_party\glad\include\glad\glad.h" />
     <ClInclude Include="Src\third_party\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Src\third_party\glfw3.h" />
+    <ClInclude Include="Src\third_party\imgui\imconfig.h" />
+    <ClInclude Include="Src\third_party\imgui\imgui.h" />
+    <ClInclude Include="Src\third_party\imgui\imgui_internal.h" />
+    <ClInclude Include="Src\third_party\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Src\third_party\imgui\imstb_textedit.h" />
+    <ClInclude Include="Src\third_party\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
