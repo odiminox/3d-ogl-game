@@ -289,7 +289,7 @@ namespace game
 
     namespace camera
     {
-      matrix::Matrix3 frustrum(float left, float right, float bottom, float top, float near, float far)
+      inline matrix::Matrix3 frustrum(float left, float right, float bottom, float top, float near, float far)
       {
         const float a = 2.0f * near / (right - left);
         const float b = 2.0f * near / (top - bottom);
@@ -311,7 +311,7 @@ namespace game
         return frustrum_matrix;
       }
 
-      matrix::Matrix3 perspective(float fov, float aspect, float front, float back)
+      inline matrix::Matrix3 perspective(float fov, float aspect, float front, float back)
       {
         float tangent = tanf(deg_to_radians((fov / 2)));
         float height = front * tangent;
