@@ -33,6 +33,8 @@ namespace game
         return -1;
       }
 
+      glEnable(GL_DEPTH_TEST);
+
       glViewport(0, 0, 800, 600);
       glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -49,18 +51,17 @@ namespace game
 
     void Renderer::world_render_frame()
     {
-      glfwSwapBuffers(window);
-      glfwPollEvents();
       glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-      glClear(GL_COLOR_BUFFER_BIT);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
       for (render_data::RenderData* render_data_object : render_objects)
       {
         render_data_object->material.render_material();
         render_data_object->vertex_object.render_vertex();
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
       }
+
+      glfwSwapBuffers(window);
+      glfwPollEvents();
     }
 
     void Renderer::world_render_loop(bool quit_game)

@@ -27,7 +27,7 @@ int Game::init()
 {
   std::cout << " INIT! " << std::endl;
 
-  entities.push_back(&entity);
+  //entities.push_back(&entity);
 
   player.set_position(0.0f, -0.25f, 1.0f);
   player.set_rotation(0.0f);
@@ -47,8 +47,6 @@ int Game::init()
   {
     return -1;
   }
-
-  std::cout << "initialising world entities" << std::endl;
 
   return 1;
 }

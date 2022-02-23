@@ -15,7 +15,7 @@ namespace game
       maths::matrix::Matrix3* shader_transform = new maths::matrix::Matrix3(1);
       maths::matrix::Matrix3 model = maths::matrix::Matrix3(1.0f);
       maths::matrix::Matrix3 view = maths::matrix::Matrix3(1.0f);
-      maths::matrix::Matrix3 projection;
+      maths::matrix::Matrix3 projection = maths::matrix::Matrix3(1.0f);
 
       const char* vertex_shader_code = "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
@@ -129,16 +129,54 @@ namespace game
 
     struct VertexObject
     {
-      unsigned int vertex_array_object;
       unsigned int element_buffer_object;
+      unsigned int vertex_array_object;
+      unsigned int vertex_buffer_object;
 
       int initialise()
       {
         float vertices[] = {
-           0.5f,  0.5f, 0.0f,  // top right
-           0.5f, -0.5f, 0.0f,  // bottom right
-          -0.5f, -0.5f, 0.0f,  // bottom left
-          -0.5f,  0.5f, 0.0f   // top left 
+       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
         };
         unsigned int indices[] = {
             0, 1, 3,   // first triangle
@@ -147,24 +185,22 @@ namespace game
 
         // this is not an ideal way to do this. We want to batch all the vertices into a single buffer and call all this once - 
         // but works for now as a quick n dirty means to get multiple objects up
-        unsigned int vertex_buffer_object;
-        glGenBuffers(1, &vertex_buffer_object);
-        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
 
         glGenVertexArrays(1, &vertex_array_object);
-        glGenBuffers(1, &element_buffer_object);
+        glGenBuffers(1, &vertex_buffer_object);
 
         glBindVertexArray(vertex_array_object);
+
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_object);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_object);
+        //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
 
         return 0;
       }
@@ -172,7 +208,7 @@ namespace game
       void render_vertex() const
       {
         glBindVertexArray(vertex_array_object);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
       }
     };
 
