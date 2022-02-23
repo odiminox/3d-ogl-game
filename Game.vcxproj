@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>I:\2d-ogl-game\Src\third_party\fmod\api\inc;I:\2d-ogl-game\Src\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>I:\2d-ogl-game\Src\third_party\fmod\api\inc;I:\2d-ogl-game\Src\third_party;I:\2d-ogl-game\Src\third_party\imgui\misc;I:\2d-ogl-game\Src\third_party\imgui\backends;I:\2d-ogl-game\Src\third_party\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

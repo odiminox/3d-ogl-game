@@ -10,6 +10,9 @@
 
 
 #include "third_party/fmod/api/inc/fmod.h"
+#include "third_party/imgui/imgui.h"
+#include "third_party/imgui/backends/imgui_impl_glfw.h"
+#include "third_party/imgui/backends/imgui_impl_opengl3.h"
 
 #include "Game.h"
 
@@ -27,6 +30,20 @@ int Game::init()
 {
   std::cout << " INIT! " << std::endl;
 
+  if (!renderer.render_init())
+  {
+    return -1;
+  }
+
+
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImGuiIO& io = ImGui::GetIO(); (void)io;
+  ImGui::StyleColorsDark();
+
+  ImGui_ImplGlfw_InitForOpenGL(renderer.get_window(), true);
+  ImGui_ImplOpenGL3_Init("#version 100");
+
   //entities.push_back(&entity);
 
   player.set_position(0.0f, -0.25f, 1.0f);
@@ -42,11 +59,6 @@ int Game::init()
 
   entity.render_data.material.shader_transform = &entity.transform_matrix;
   renderer.add_new_render_data_object(entity.render_data);
-
-  if (!renderer.render_init())
-  {
-    return -1;
-  }
 
   return 1;
 }

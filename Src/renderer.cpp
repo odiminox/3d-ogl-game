@@ -1,4 +1,7 @@
 #include "renderer.h"
+#include "third_party/imgui/imgui.h"
+#include "third_party/imgui/backends/imgui_impl_glfw.h"
+#include "third_party/imgui/backends/imgui_impl_opengl3.h"
 
 namespace game
 {
@@ -51,6 +54,14 @@ namespace game
 
     void Renderer::world_render_frame()
     {
+      glfwPollEvents();
+
+      ImGui_ImplOpenGL3_NewFrame();
+      ImGui_ImplGlfw_NewFrame();
+      ImGui::NewFrame();
+      ImGui::Begin("Hello, world!");
+      ImGui::End();
+
       glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -61,7 +72,7 @@ namespace game
       }
 
       glfwSwapBuffers(window);
-      glfwPollEvents();
+
     }
 
     void Renderer::world_render_loop(bool quit_game)
@@ -101,6 +112,11 @@ namespace game
     void Renderer::add_new_render_data_object(render_data::RenderData& render_data)
     {
       render_objects.push_back(&render_data);
+    }
+
+    GLFWwindow* Renderer::get_window() const
+    {
+      return window;
     }
   }
 }
