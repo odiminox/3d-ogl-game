@@ -237,7 +237,7 @@ namespace game
         return translate_matrix;
       }
 
-      inline Matrix3 rotate_x(Matrix3& mat, float a)
+      inline Matrix3 rotate_x(float a)
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
@@ -253,7 +253,7 @@ namespace game
         return rotation_matrix;
       }
       
-      inline Matrix3 rotate_y(Matrix3& mat, float a)
+      inline Matrix3 rotate_y(float a)
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
@@ -269,7 +269,7 @@ namespace game
         return rotation_matrix;
       }
       
-      inline Matrix3 rotate_z(Matrix3& mat, float a)
+      inline Matrix3 rotate_z(float a)
       {
         const float cosine_of_a = cos(a);
         const float sine_of_a = sin(a);
@@ -289,20 +289,20 @@ namespace game
 
     namespace camera
     {
-      inline matrix::Matrix3 frustrum(float left, float right, float bottom, float top, float near, float far)
+      inline matrix::Matrix3 frustrum(float left, float right, float bottom, float top, float near_plane, float far_plane)
       {
-        const float a = 2.0f * near / (right - left);
-        const float b = 2.0f * near / (top - bottom);
+        const float a = 2.0f * near_plane / (right - left);
+        const float b = 2.0f * near_plane / (top - bottom);
         const float c = (right + left) / (right - left);
         const float d = (top + bottom) / (top - bottom);
-        const float e = -(far + near) / (far - near);
+        const float e = -(far_plane + near_plane) / (far_plane - near_plane);
         const float f = -left;
-        const float g = -(2 * far * near) / (far - near);
+        const float g = -(2 * far_plane * near_plane) / (far_plane - near_plane);
         const float h = 0.0f;
 
         float frustrum_matrix_data[4][4] = {
-          {a, 0.0f, c, 0.0f},
-          {0.0f, b, d, 0.0f},
+          {a,    0.0f, c, 0.0f},
+          {0.0f, b,    d, 0.0f},
           {0.0f, 0.0f, e, g},
           {0.0f, 0.0f, f, h},
         };
@@ -321,9 +321,7 @@ namespace game
           width, 
           -height, 
           height, 
-          front, 
-          back);
-
+          front, back);
         return perspective_matrix;
       }
     }

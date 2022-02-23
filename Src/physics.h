@@ -9,14 +9,14 @@ namespace game
   {
     using namespace maths::vector;
 
-    static float G = 0.0f;
+    static float G = 0.1f;
 
     struct PhysicsData
     {
       Vector3 velocity{0.0f, 0.0f, 0.0f};
-      Vector3 acceleration{0.0f, -0.0f, 0.0f};
-      float damping{0.0f};
-      float inverse_mass{0.0f};
+      Vector3 acceleration{0.0f, -0.001f, 0.0f};
+      float damping{1.0f};
+      float inverse_mass{0.1f};
     };
 
     inline void integrate(Vector3& position, PhysicsData& physics_data, float time)

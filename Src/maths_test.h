@@ -86,7 +86,7 @@ inline void matrix_test()
 
   Matrix3 res = mat1 * mat2;
 
-  Matrix3 rotate_res = rotate_x(mat1, 1);
+  Matrix3 rotate_res = rotate_x(1);
 
   std::cout << "end" << std::endl;
 }

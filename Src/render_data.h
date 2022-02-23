@@ -13,13 +13,19 @@ namespace game
     struct Material
     {
       maths::matrix::Matrix3* shader_transform = new maths::matrix::Matrix3(1);
+      maths::matrix::Matrix3 model = maths::matrix::Matrix3(1.0f);
+      maths::matrix::Matrix3 view = maths::matrix::Matrix3(1.0f);
+      maths::matrix::Matrix3 projection;
 
       const char* vertex_shader_code = "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
-        "uniform mat4 transform;\n"
+        "uniform mat4 model;\n"
+        "uniform mat4 view;\n"
+        "uniform mat4 projection;\n"
+
         "void main()\n"
         "{\n"
-        "   gl_Position = transform * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+        "   gl_Position = projection * view * model * vec4(aPos, 1.0);\n"
         "}\0";
 
       const char* fragment_shader_code = "#version 330 core\n"
@@ -89,14 +95,29 @@ namespace game
         glDeleteShader(vertex_shader);
         glDeleteShader(fragment_shader);
 
+        model = maths::matrix::rotate_x(maths::deg_to_radians(-1.0f));
+        maths::vector::Vector3 translation(0.0f, 0.1f, -15.0f);
+        view = maths::matrix::translate(view, translation);
+        projection = maths::camera::perspective(maths::deg_to_radians(45.0f), 
+          800.0f / 600.0f, 
+          0.1f, 
+          100.0f);
+
+
         return 0;
       }
 
       void render_material() const
       {
         glUseProgram(shader_program_id);
-        unsigned int transformLoc = glGetUniformLocation(shader_program_id, "transform");
-        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, *shader_transform->m);
+        unsigned int modelLoc = glGetUniformLocation(shader_program_id, "model");
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, *shader_transform->m);
+
+        unsigned int viewLoc = glGetUniformLocation(shader_program_id, "view");
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, *view.m);
+
+        unsigned int projectionLoc = glGetUniformLocation(shader_program_id, "projection");
+        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, *view.m);
       }
 
       void cleanup()

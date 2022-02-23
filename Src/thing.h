@@ -58,7 +58,7 @@ namespace game
         // L = T * R * S
 
         Matrix3 translate_matrix = translate(transform_matrix, vector_data.position);
-        Matrix3 rotation_matrix = rotate_z(transform_matrix, maths::deg_to_radians(vector_data.rotation.z));
+        Matrix3 rotation_matrix = rotate_z(maths::deg_to_radians(vector_data.rotation.z));
         Matrix3 scale_matrix = scale(transform_matrix, vector_data.scale);
 
         transform_matrix = translate_matrix * rotation_matrix;
