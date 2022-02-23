@@ -20,6 +20,7 @@ I have tried to use C++ in a manner that is friendly to games with the following
 - Fixed simulation time for game logic step isolated from renderer/network logic
 - FMOD audio
 - Custom physics system for basic integration
+- Dear Imgui
 
 ### Planned Features
 - Particles
