@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "third_party/glad/include/glad/glad.h"
-#include "third_party/glfw3.h"
+#include "glfw3.h"
 #include "render_data.h"
 
 namespace game

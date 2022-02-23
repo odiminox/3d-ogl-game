@@ -1,7 +1,7 @@
 #include "renderer.h"
-#include "third_party/imgui/imgui.h"
-#include "third_party/imgui/backends/imgui_impl_glfw.h"
-#include "third_party/imgui/backends/imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 namespace game
 {
@@ -49,18 +49,20 @@ namespace game
 
       std::cout << "Graphics stage booted up" << std::endl;
 
+      IMGUI_CHECKVERSION();
+      ImGui::CreateContext();
+      ImGuiIO& io = ImGui::GetIO(); (void)io;
+      ImGui::StyleColorsDark();
+      ImGui_ImplGlfw_InitForOpenGL(window, true);
+      ImGui_ImplOpenGL3_Init("#version 100");
+
+
       return 0;
     }
 
     void Renderer::world_render_frame()
     {
       glfwPollEvents();
-
-      ImGui_ImplOpenGL3_NewFrame();
-      ImGui_ImplGlfw_NewFrame();
-      ImGui::NewFrame();
-      ImGui::Begin("Hello, world!");
-      ImGui::End();
 
       glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -72,7 +74,6 @@ namespace game
       }
 
       glfwSwapBuffers(window);
-
     }
 
     void Renderer::world_render_loop(bool quit_game)
