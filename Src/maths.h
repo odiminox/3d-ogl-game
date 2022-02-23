@@ -286,5 +286,46 @@ namespace game
       }
 
     }
+
+    namespace camera
+    {
+      matrix::Matrix3 frustrum(float left, float right, float bottom, float top, float near, float far)
+      {
+        const float a = 2.0f * near / (right - left);
+        const float b = 2.0f * near / (top - bottom);
+        const float c = (right + left) / (right - left);
+        const float d = (top + bottom) / (top - bottom);
+        const float e = -(far + near) / (far - near);
+        const float f = -left;
+        const float g = -(2 * far * near) / (far - near);
+        const float h = 0.0f;
+
+        float frustrum_matrix_data[4][4] = {
+          {a, 0.0f, c, 0.0f},
+          {0.0f, b, d, 0.0f},
+          {0.0f, 0.0f, e, g},
+          {0.0f, 0.0f, f, h},
+        };
+
+        matrix::Matrix3 frustrum_matrix(frustrum_matrix_data);
+        return frustrum_matrix;
+      }
+
+      matrix::Matrix3 perspective(float fov, float aspect, float front, float back)
+      {
+        float tangent = tanf(deg_to_radians((fov / 2)));
+        float height = front * tangent;
+        float width = height * aspect;
+
+        matrix::Matrix3 perspective_matrix = frustrum(-width, 
+          width, 
+          -height, 
+          height, 
+          front, 
+          back);
+
+        return perspective_matrix;
+      }
+    }
   }
 }
