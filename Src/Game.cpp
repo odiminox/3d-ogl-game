@@ -10,15 +10,10 @@
 
 #include "third_party/fmod/api/inc/fmod.h"
 
-#include <tiny_gltf.h>
+
 
 #include "Game.h"
 
-#define TINYGLTF_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#define TINYGLTF_NOEXCEPTION
-#define JSON_NOEXCEPTION
 
 /*
   FSOUND_SAMPLE *sample = FSOUND_Sample_Load(FSOUND_FREE , "sounds/shoot.wav", 0, 0, 0);
@@ -33,8 +28,6 @@ game::player::Player player;
 int Game::init()
 {
   std::cout << " INIT! " << std::endl;
-
-  tinygltf::TinyGLTF loader;
 
   //entities.push_back(&entity);
 

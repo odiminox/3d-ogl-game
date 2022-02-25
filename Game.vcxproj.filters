@@ -51,6 +51,9 @@
     <ClCompile Include="Src\third_party\tinygltf\tiny_gltf.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\maths.h">
@@ -140,6 +143,9 @@
     <ClInclude Include="Src\third_party\tinygltf\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
@@ -148,5 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\glfw3.dll" />
+    <None Include="Src\config\engine_template.cfg" />
+    <None Include="Src\config\world_templatet.cfg" />
   </ItemGroup>
 </Project>

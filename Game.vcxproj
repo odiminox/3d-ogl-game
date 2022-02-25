@@ -145,6 +145,7 @@
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\maths_test.h" />
     <ClCompile Include="Src\glad.cpp" />
+    <ClCompile Include="Src\mesh.cpp" />
     <ClCompile Include="Src\renderer.cpp" />
     <ClCompile Include="Src\third_party\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="Src\third_party\imgui\backends\imgui_impl_opengl3.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\maths.h" />
     <ClInclude Include="Src\entity.h" />
+    <ClInclude Include="Src\mesh.h" />
     <ClInclude Include="Src\physics.h" />
     <ClInclude Include="Src\player.h" />
     <ClInclude Include="Src\renderer.h" />
@@ -193,6 +195,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\glfw3.dll" />
+    <None Include="Src\config\engine_template.cfg" />
+    <None Include="Src\config\world_templatet.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
