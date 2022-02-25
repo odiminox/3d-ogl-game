@@ -1,8 +1,8 @@
-# 2d-ogl-game
-## Small, silly 2D game using OGL 3.3
+# 3d-ogl-game
+## Small, silly 3D game using OGL 3.3
 
 ### Overview
-Tasked myself to create a simple 2D C++ game in OpenGL 3.3 using as few external libs as possible in as little time as possible.
+Tasked myself to create a simple 3D C++ game in OpenGL 3.3 using as few external libs as possible in as little time as possible.
 I have tried to use C++ in a manner that is friendly to games with the following tenants:
 - Avoid any unnecessary levels of abstraction by using OOP in its most simplest and practical forms, favouring composition and aggregation
 - Limit usage of heavy std libraries (some will be used for early development to speed up implementation and improved later)
@@ -24,6 +24,7 @@ I have tried to use C++ in a manner that is friendly to games with the following
 
 ### Planned Features
 - Particles
+- glTF asset handling
 - Communicate with AWS services for score leaderboard
 
 ### TODO
