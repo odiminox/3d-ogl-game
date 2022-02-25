@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>I:\2d-ogl-game\Src\third_party\fmod\api\inc;I:\2d-ogl-game\Src\third_party;I:\2d-ogl-game\Src\third_party\imgui\misc;I:\2d-ogl-game\Src\third_party\imgui\backends;I:\2d-ogl-game\Src\third_party\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>I:\2d-ogl-game\Src\third_party\fmod\api\inc;I:\2d-ogl-game\Src\third_party;I:\2d-ogl-game\Src\third_party\imgui\misc;I:\2d-ogl-game\Src\third_party\imgui\backends;I:\2d-ogl-game\Src\third_party\imgui;I:\2d-ogl-game\Src\third_party\tinygltf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +153,7 @@
     <ClCompile Include="Src\third_party\imgui\imgui_draw.cpp" />
     <ClCompile Include="Src\third_party\imgui\imgui_tables.cpp" />
     <ClCompile Include="Src\third_party\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Src\third_party\tinygltf\tiny_gltf.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -180,6 +181,10 @@
     <ClInclude Include="Src\third_party\imgui\imstb_rectpack.h" />
     <ClInclude Include="Src\third_party\imgui\imstb_textedit.h" />
     <ClInclude Include="Src\third_party\imgui\imstb_truetype.h" />
+    <ClInclude Include="Src\third_party\tinygltf\json.hpp" />
+    <ClInclude Include="Src\third_party\tinygltf\stb_image.h" />
+    <ClInclude Include="Src\third_party\tinygltf\stb_image_write.h" />
+    <ClInclude Include="Src\third_party\tinygltf\tiny_gltf.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
