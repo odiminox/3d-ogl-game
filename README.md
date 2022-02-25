@@ -24,6 +24,7 @@ I have tried to use C++ in a manner that is friendly to games with the following
 
 ### In Progress
 - Resource Manager
+- Engine and world file configuration
 
 ### Planned Features
 - Particles
